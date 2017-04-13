@@ -1,120 +1,187 @@
-#include <Adafruit_ATParser.h>
-#include <Adafruit_BLE.h>
-#include <Adafruit_BLEBattery.h>
-#include <Adafruit_BLEEddystone.h>
-#include <Adafruit_BLEGatt.h>
-#include <Adafruit_BLEMIDI.h>
-#include <Adafruit_BluefruitLE_SPI.h>
-#include <Adafruit_BluefruitLE_UART.h>
+/*********************************************************************
+ This is an example for our nRF51822 based Bluefruit LE modules
 
-// the setup function runs once when you press reset or power the board
-void setup() {
-  // initialize digital pin 13 as an output.
-  pinMode(13, OUTPUT);
-}
- 
-// the loop function runs over and over again forever
-void loop() {
-  digitalWrite(13, HIGH);   // turn the LED on (HIGH is the voltage level)
-  delay(2000);              // wait for a second
-  digitalWrite(13, LOW);    // turn the LED off by making the voltage LOW
-  delay(1000);              // wait for a second
-}
+ Pick one up today in the adafruit shop!
 
-/*#include <Servo.h>
+ Adafruit invests time and resources providing this open source code,
+ please support Adafruit and open-source hardware by purchasing
+ products from Adafruit!
+
+ MIT license, check LICENSE for more information
+ All text above, and the splash screen below must be included in
+ any redistribution
+*********************************************************************/
+
+#include <Arduino.h>
 #include <SPI.h>
-#include "Adafruit_BLE_UART.h"
-#include <String.h>
+#if not defined (_VARIANT_ARDUINO_DUE_X_) && not defined (_VARIANT_ARDUINO_ZERO_)
+  #include <SoftwareSerial.h>
+#endif
 
-Servo myservo;
+#include "Adafruit_BLE.h"
+#include "Adafruit_BluefruitLE_SPI.h"
+#include "Adafruit_BluefruitLE_UART.h"
+
+#include "BluefruitConfig.h"
+
+/*=========================================================================
+    APPLICATION SETTINGS
+
+    FACTORYRESET_ENABLE       Perform a factory reset when running this sketch
+   
+                              Enabling this will put your Bluefruit LE module
+                              in a 'known good' state and clear any config
+                              data set in previous sketches or projects, so
+                              running this at least once is a good idea.
+   
+                              When deploying your project, however, you will
+                              want to disable factory reset by setting this
+                              value to 0.  If you are making changes to your
+                              Bluefruit LE device via AT commands, and those
+                              changes aren't persisting across resets, this
+                              is the reason why.  Factory reset will erase
+                              the non-volatile memory where config data is
+                              stored, setting it back to factory default
+                              values.
+       
+                              Some sketches that require you to bond to a
+                              central device (HID mouse, keyboard, etc.)
+                              won't work at all with this feature enabled
+                              since the factory reset will clear all of the
+                              bonding data stored on the chip, meaning the
+                              central device won't be able to reconnect.
+    MINIMUM_FIRMWARE_VERSION  Minimum firmware version to have some new features
+    MODE_LED_BEHAVIOUR        LED activity, valid options are
+                              "DISABLE" or "MODE" or "BLEUART" or
+                              "HWUART"  or "SPI"  or "MANUAL"
+    -----------------------------------------------------------------------*/
+    #define FACTORYRESET_ENABLE         1
+    #define MINIMUM_FIRMWARE_VERSION    "0.6.6"
+    #define MODE_LED_BEHAVIOUR          "MODE"
+/*=========================================================================*/
+
+// Create the bluefruit object, either software serial...uncomment these lines
+/*
+SoftwareSerial bluefruitSS = SoftwareSerial(BLUEFRUIT_SWUART_TXD_PIN, BLUEFRUIT_SWUART_RXD_PIN);
+
+Adafruit_BluefruitLE_UART ble(bluefruitSS, BLUEFRUIT_UART_MODE_PIN,
+                      BLUEFRUIT_UART_CTS_PIN, BLUEFRUIT_UART_RTS_PIN);
+*/
+
+/* ...or hardware serial, which does not need the RTS/CTS pins. Uncomment this line */
+// Adafruit_BluefruitLE_UART ble(BLUEFRUIT_HWSERIAL_NAME, BLUEFRUIT_UART_MODE_PIN);
+
+/* ...hardware SPI, using SCK/MOSI/MISO hardware SPI pins and then user selected CS/IRQ/RST */
+Adafruit_BluefruitLE_SPI ble(BLUEFRUIT_SPI_CS, BLUEFRUIT_SPI_IRQ, BLUEFRUIT_SPI_RST);
+
+/* ...software SPI, using SCK/MOSI/MISO user-defined SPI pins and then user selected CS/IRQ/RST */
+//Adafruit_BluefruitLE_SPI ble(BLUEFRUIT_SPI_SCK, BLUEFRUIT_SPI_MISO,
+//                             BLUEFRUIT_SPI_MOSI, BLUEFRUIT_SPI_CS,
+//                             BLUEFRUIT_SPI_IRQ, BLUEFRUIT_SPI_RST);
 
 
-
-//This function is called whenever select ACI events happen
-void aciCallback(aci_evt_opcode_t event) {
-  switch(event)
-  {
-    case ACI_EVT_DEVICE_STARTED:
-      Serial.println(F("Advertising started"));
-      break;
-    case ACI_EVT_CONNECTED:
-      Serial.println(F("Connected!"));
-      break;
-    case ACI_EVT_DISCONNECTED:
-      Serial.println(F("Disconnected or advertising timed out"));
-      break;
-    default:
-      break;
-  }
+// A small helper
+void error(const __FlashStringHelper*err) {
+  Serial.println(err);
+  while (1);
 }
 
-
-
-
-//This function is called whenever data arrives on the RX channel
-void rxCallback(uint8_t *buffer, uint8_t len)
+/**************************************************************************/
+/*!
+    @brief  Sets up the HW an the BLE module (this function is called
+            automatically on startup)
+*/
+/**************************************************************************/
+void setup(void)
 {
+  while (!Serial);  // required for Flora & Micro
+  delay(500);
 
-  //convert the incoming data into a string, to make it easier to work with
-  String receivedString;
-  
-  for (int i=0; i<len;i++) {
-    if ((char)buffer[i] != ' ' && (char)buffer[i] != '\n') {
-      receivedString += (char)buffer[i]; 
-      }
+  Serial.begin(115200);
+
+  /* Initialise the module */
+  Serial.print(F("Initialising the Bluefruit LE module: "));
+
+  if ( !ble.begin(VERBOSE_MODE) )
+  {
+    error(F("Couldn't find Bluefruit, make sure it's in CoMmanD mode & check wiring?"));
   }
+  Serial.println( F("OK!") );
 
-  //print out the string that was received
-  Serial.println(receivedString);
-
-  //count how many "dots" are in the received string, and record the indices of the dots
-  int dotIndices[2];
-  int dotCounter = 0;
-  for (int c=0; c<receivedString.length();c++) {
-    if (receivedString[c] == '.') {
-      dotIndices[dotCounter] = c;
-      dotCounter++;
+  if ( FACTORYRESET_ENABLE )
+  {
+    /* Perform a factory reset to make sure everything is in a known state */
+    Serial.println(F("Performing a factory reset: "));
+    if ( ! ble.factoryReset() ){
+      error(F("Couldn't factory reset"));
     }
   }
 
-  //if the dotCounter is 2, this is an RGB packet
-  if (dotCounter==2) {
-    
+  /* Disable command echo from Bluefruit */
+  ble.echo(false);
+
+  Serial.println("Requesting Bluefruit info:");
+  /* Print Bluefruit information */
+  ble.info();
+
+  ble.verbose(false);  // debug info is a little annoying after this point!
+
+  /* Wait for connection */
+  while (! ble.isConnected()) {
+      delay(500);
   }
 
-  //if we didn't receive a color command, check if the string could be a special command
-  
-  if (receivedString == "off") {
-    Serial.println("off");
-    
-  } else if (receivedString == "slowFade") {
-    
-  } else if (receivedString == "fastFade") {
-    
-  } else if (receivedString == "cut") {
-    
-  } else if (receivedString == "flash") {
-    
+  Serial.println(F("******************************"));
+
+  // LED Activity command is only supported from 0.6.6
+  if ( ble.isVersionAtLeast(MINIMUM_FIRMWARE_VERSION) )
+  {
+    // Change Mode LED Activity
+    Serial.println(F("Change LED activity to " MODE_LED_BEHAVIOUR));
+    ble.sendCommandCheckOK("AT+HWModeLED=" MODE_LED_BEHAVIOUR);
   }
-    
+
+  // Set module to DATA mode
+  Serial.println( F("Switching to DATA mode!") );
+  ble.setMode(BLUEFRUIT_MODE_DATA);
+
+  Serial.println(F("******************************"));
 }
 
-void setup() {
-  // put your setup code here, to run once:
+/**************************************************************************/
+/*!
+    @brief  Constantly poll for new command or response data
+*/
+/**************************************************************************/
+void loop(void)
+{
+  // Check for user input
+  char n, inputs[BUFSIZE+1];
 
-  myservo.attach(12);
-  myservo.write(70);
+  if (Serial.available())
+  {
+    n = Serial.readBytes(inputs, BUFSIZE);
+    inputs[n] = 0;
+    // Send characters to Bluefruit
+    Serial.print("Sending: ");
+    Serial.println(inputs);
+
+    // Send input data to host via Bluefruit
+    ble.print(inputs);
+  }
+
+  // Echo received data
+  while ( ble.available() ) {
+    int c = ble.read();
+
+    Serial.println("");
+    Serial.print((char)c);
+
+    // Hex output too, helps w/debugging!
+    Serial.print(" [0x");
+    if (c <= 0xF) Serial.print(F("0"));
+    Serial.print(c, HEX);
+    Serial.print("] ");
+    Serial.println("");
+  }
 }
-
-void loop() {
-  // put your main code here, to run repeatedly:
-  for (int i=0; i<170; i++) {
-    //myservo.write(i);
-    //delay(10);
-  }
-
-  for (int i=170; i>10; i--) {
-    //myservo.write(i);
-    //delay(10);
-  }
-}*/

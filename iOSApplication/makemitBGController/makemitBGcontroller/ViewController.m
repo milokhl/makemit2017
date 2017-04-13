@@ -169,7 +169,7 @@
         [dpArrayTransition addObject:dataPoint1];
         
         //algorithm for pump to use & amount to push
-        pumpAmountToSend = 1.0;
+        pumpAmountToSend = currentBG;
         
         //bluetooth characteristics
         /*[btManager updateValue:[NSData dataWithBytes:&pumpActiveId length:sizeof(pumpActiveId)] forCharacteristic:pumpActive onSubscribedCentrals:nil];
