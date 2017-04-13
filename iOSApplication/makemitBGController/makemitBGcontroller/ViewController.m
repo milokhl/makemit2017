@@ -59,37 +59,49 @@
     [currentBGLabel setText:[NSString stringWithFormat:@"%i",(int)currentBG]];
 }
 
-- (IBAction)raiseBGrate:(id)sender {
-    printf("raise BG rate\n");
-    
-    BGTargetOn = 0;
-    
-    currentRate += 0.75;
-    if (currentRate >= 2.5) {
-        currentRate = 2.5;
+-(void)centralManagerDidUpdateState:(CBCentralManager *)central {
+    if (central.state == CBManagerStatePoweredOn) {
+        //[btCManager scanForPeripheralsWithServices:@[[CBUUID UUIDWithString:@"6E400001-B5A3-F393-E0A9-E50E24DCCA9E"]] options:nil];
+        [btCManager scanForPeripheralsWithServices:nil options:nil];
     }
-    
-    if (currentRate >= 2.5) {
-        [raiseRateButton setEnabled:NO];
-    }
-    [lowerRateButton setEnabled:YES];
 }
 
-- (IBAction)lowerBGrate:(id)sender {
-    printf("lower BG rate\n");
-    
-    BGTargetOn = 0;
-    
-    currentRate -= 0.75;
-    if (currentRate <= -2.5) {
-        currentRate = -2.5;
+- (void)centralManager:(CBCentralManager *)central didDiscoverPeripheral:(CBPeripheral *)peripheral advertisementData:(NSDictionary<NSString *,id> *)advertisementData RSSI:(NSNumber *)RSSI {
+    printf("DISCOVERED: %s: %s - %i services\n",[peripheral.name UTF8String],[[peripheral.identifier UUIDString] UTF8String],(int)peripheral.services.count);
+    if ([peripheral.name isEqualToString:@"Adafruit Bluefruit LE"] && [[peripheral.identifier UUIDString] isEqualToString:@"1A58BC43-D08C-4110-9BAD-A5349ABC0D45"]) {
+        discoveredPeripheral = peripheral;
+        [btCManager connectPeripheral:discoveredPeripheral options:nil];
+        [btCManager stopScan];
     }
-    
-    if (currentRate <= -2.5) {
-        [lowerRateButton setEnabled:NO];
+}
+
+- (void)centralManager:(CBCentralManager *)central didConnectPeripheral:(CBPeripheral *)peripheral {
+    printf("Peripheral connected\n");
+    peripheral.delegate = self;
+    [peripheral discoverServices:nil];
+}
+
+- (void)peripheral:(CBPeripheral *)peripheral didDiscoverServices:(NSError *)error {
+    for (CBService *service in peripheral.services) {
+        //NSLog(@"Discovered service %@", service);
+        if ([[service.UUID UUIDString] isEqualToString:@"6E400001-B5A3-F393-E0A9-E50E24DCCA9E"]) {
+            printf("Found data service...\n");
+            [peripheral discoverCharacteristics:nil forService:service];
+        }
     }
-    
-    [raiseRateButton setEnabled:YES];
+}
+
+- (void)peripheral:(CBPeripheral *)peripheral didDiscoverCharacteristicsForService:(CBService *)service error:(NSError *)error {
+    for (CBCharacteristic *characteristic in service.characteristics) {
+        //NSLog(@"Discovered characteristic %@", characteristic);
+        if ([[characteristic.UUID UUIDString] isEqualToString:@"6E400002-B5A3-F393-E0A9-E50E24DCCA9E"]) {
+            printf("Found write characteristic!\n");
+            writeCharacteristic = characteristic;
+        } else if ([[characteristic.UUID UUIDString] isEqualToString:@"6E400003-B5A3-F393-E0A9-E50E24DCCA9E"]) {
+            printf("Found notify characteristic!\n");
+            notifyCharacteristic = characteristic;
+        }
+    }
 }
 
 -(void)peripheralManagerDidUpdateState:(CBPeripheralManager *)peripheral{
@@ -98,8 +110,8 @@
     }
     
     if (peripheral.state == CBManagerStatePoweredOn) {
-        [btManager startAdvertising:nil];
-        [btManager addService:mainDataService];
+        /*[btManager startAdvertising:nil];
+        [btManager addService:mainDataService];*/
         printf("Peripheral advertising\n");
     }
 }
@@ -160,16 +172,23 @@
         pumpAmountToSend = 1.0;
         
         //bluetooth characteristics
-        [btManager updateValue:[NSData dataWithBytes:&pumpActiveId length:sizeof(pumpActiveId)] forCharacteristic:pumpActive onSubscribedCentrals:nil];
-        [btManager updateValue:[NSData dataWithBytes:&pumpAmountToSend length:sizeof(pumpAmountToSend)] forCharacteristic:pumpAmount onSubscribedCentrals:nil];
-        printf("UPDATE: %i, %.1f\n",pumpActiveId,pumpAmountToSend);
+        /*[btManager updateValue:[NSData dataWithBytes:&pumpActiveId length:sizeof(pumpActiveId)] forCharacteristic:pumpActive onSubscribedCentrals:nil];
+        [btManager updateValue:[NSData dataWithBytes:&pumpAmountToSend length:sizeof(pumpAmountToSend)] forCharacteristic:pumpAmount onSubscribedCentrals:nil];*/
+        
+        if (discoveredPeripheral != nil && writeCharacteristic != nil) {
+            NSMutableData *dataToWrite = [NSMutableData dataWithCapacity:0];
+            [dataToWrite appendBytes:&pumpAmountToSend length:sizeof(float)];
+            [discoveredPeripheral writeValue:dataToWrite forCharacteristic:writeCharacteristic type:CBCharacteristicWriteWithoutResponse];
+            
+            printf("UPDATE SENT: %i, %.1f\n",pumpActiveId,pumpAmountToSend);
+        } else {
+            printf("UPDATE NOT SENT: %i, %.1f\n",pumpActiveId,pumpAmountToSend);
+        }
         
         //updating next rounds values
         if (BGTargetOn == 0) {
             currentBG += (float)currentRate*12.0;
             currentRate = currentRate + ((0 - currentRate)/2.25);
-            [raiseRateButton setEnabled:YES];
-            [lowerRateButton setEnabled:YES];
         } else {
             currentBG += (currentTargetBG - currentBG)/2.25;
         }
@@ -226,7 +245,7 @@
     // Do any additional setup after loading the view, typically from a nib.
     
     //refreshTimerMax = 600;
-    refreshTimerMax = 10;
+    refreshTimerMax = 60;
     refreshTimer = refreshTimerMax;
     
     currentBG = 125;
@@ -254,14 +273,17 @@
     
     pumpActiveId = 1;
     
-    //bluetooth
-    btManager = [[CBPeripheralManager alloc] initWithDelegate:self queue:nil];
+    //bluetooth - broadcasting services/characteristics, only if acting as peripheral
+    /*btManager = [[CBPeripheralManager alloc] initWithDelegate:self queue:nil];
     pumpAmount = [[CBMutableCharacteristic alloc] initWithType:[CBUUID UUIDWithString:@"0C50D390-DC8E-436B-8AD0-A36D1B304B17"] properties:CBCharacteristicPropertyNotify value:nil permissions:CBAttributePermissionsReadable];
     pumpActive = [[CBMutableCharacteristic alloc] initWithType:[CBUUID UUIDWithString:@"0C50D390-DC8E-436B-8AD0-A36D1B304B18"] properties:CBCharacteristicPropertyNotify value:nil permissions:CBAttributePermissionsReadable];
     //[NSData dataWithBytes:&pumpActiveId length:sizeof(pumpActiveId)]
     mainDataService = [[CBMutableService alloc] initWithType:[CBUUID UUIDWithString:@"0C50D390-DC8E-436B-8AD0-A36D1B304B19"] primary:YES];
     [mainDataService setCharacteristics:[NSArray arrayWithObjects:pumpActive, pumpAmount, nil]];
-    //[btManager startAdvertising:[NSDictionary dictionaryWithObjects:[NSArray arrayWithObjects:CBAdvertisementDataServiceUUIDsKey, nil] forKeys:[NSArray arrayWithObjects:mainDataService.UUID, nil]]];
+    //[btManager startAdvertising:[NSDictionary dictionaryWithObjects:[NSArray arrayWithObjects:CBAdvertisementDataServiceUUIDsKey, nil] forKeys:[NSArray arrayWithObjects:mainDataService.UUID, nil]]];*/
+    
+    //bluetooth - connecting to services/peripherals, only if acting as central
+    btCManager = [[CBCentralManager alloc] initWithDelegate:self queue:nil];
     
     //start regular timer
     [NSTimer scheduledTimerWithTimeInterval:1/60.0f target:self selector:@selector(update:) userInfo:nil repeats:YES];

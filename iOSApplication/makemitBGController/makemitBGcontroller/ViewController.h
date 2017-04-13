@@ -3,7 +3,7 @@
 #import "BGDataPoint.h"
 #import <CoreBluetooth/CoreBluetooth.h>
 
-@interface ViewController : UIViewController <CBPeripheralManagerDelegate> {
+@interface ViewController : UIViewController <CBPeripheralManagerDelegate, CBCentralManagerDelegate, CBPeripheralDelegate> {
     int refreshTimer;
     int refreshTimerMax;
     float screenCenterWidth;
@@ -31,6 +31,11 @@
     IBOutlet UIButton *raiseTargetBGButton;
     IBOutlet UIButton *lowerTargetBGButton;
     
+    CBCentralManager *btCManager;
+    CBPeripheral *discoveredPeripheral;
+    CBCharacteristic *writeCharacteristic;
+    CBCharacteristic *notifyCharacteristic;
+    
     /*CBPeripheralManager *btManager;
     CBMutableService *mainDataService;
     CBMutableCharacteristic *pumpActive;
@@ -43,8 +48,6 @@
 
 - (IBAction)raiseBGvalue:(id)sender;
 - (IBAction)lowerBGvalue:(id)sender;
-- (IBAction)raiseBGrate:(id)sender;
-- (IBAction)lowerBGrate:(id)sender;
 
 @end
 

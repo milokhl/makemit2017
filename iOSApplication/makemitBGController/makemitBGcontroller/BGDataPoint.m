@@ -37,7 +37,7 @@
     self.uniqueObjectId = [[objectUniqueIDAssigner sharedInstance] generateNewIDForObject];
     self.scale = 0.042;
     
-    printf("NEW OBJECT w/ UUID: %i\n",self.uniqueObjectId);
+    //printf("NEW DATA POINT w/ UUID: %i\n",self.uniqueObjectId);
     
     return [self initWithImage:img];
     //return self;
