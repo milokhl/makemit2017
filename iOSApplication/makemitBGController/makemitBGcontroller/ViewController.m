@@ -176,8 +176,9 @@
         [btManager updateValue:[NSData dataWithBytes:&pumpAmountToSend length:sizeof(pumpAmountToSend)] forCharacteristic:pumpAmount onSubscribedCentrals:nil];*/
         
         if (discoveredPeripheral != nil && writeCharacteristic != nil) {
+            int dataSent = (int)pumpAmountToSend;
             NSMutableData *dataToWrite = [NSMutableData dataWithCapacity:0];
-            [dataToWrite appendBytes:&pumpAmountToSend length:sizeof(float)];
+            [dataToWrite appendBytes:&dataSent length:sizeof(int)];
             [discoveredPeripheral writeValue:dataToWrite forCharacteristic:writeCharacteristic type:CBCharacteristicWriteWithoutResponse];
             
             printf("UPDATE SENT: %i, %.1f\n",pumpActiveId,pumpAmountToSend);

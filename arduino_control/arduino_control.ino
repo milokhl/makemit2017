@@ -92,8 +92,10 @@ void error(const __FlashStringHelper*err) {
             automatically on startup)
 */
 /**************************************************************************/
-void setup(void)
-{
+void setup(void) {
+
+  pinMode(13, OUTPUT);
+  
   while (!Serial);  // required for Flora & Micro
   delay(500);
 
@@ -153,8 +155,7 @@ void setup(void)
     @brief  Constantly poll for new command or response data
 */
 /**************************************************************************/
-void loop(void)
-{
+void loop(void) {
   // Check for user input
   char n, inputs[BUFSIZE+1];
 
@@ -171,11 +172,24 @@ void loop(void)
   }
 
   // Echo received data
-  while ( ble.available() ) {
+  while (ble.available()) {
     int c = ble.read();
 
+    if (c != 0) {
+      if (c >= 245) {
+        digitalWrite(13, HIGH);
+        Serial.println("HIGH");
+      } else if (c <= 70) {
+        digitalWrite(13, HIGH);
+        Serial.println("LOW");
+      } else {
+        digitalWrite(13, LOW);
+        Serial.println("NORMAL");
+      }
+    }
+
     Serial.println("");
-    Serial.print((char)c);
+    Serial.print(c);
 
     // Hex output too, helps w/debugging!
     Serial.print(" [0x");
