@@ -150,6 +150,15 @@
     if (refreshTimer <= 0) {
         refreshTimer = refreshTimerMax;
         
+        //updating next rounds values
+        if (BGTargetOn == 0) {
+            currentBG += (float)currentRate*12.0;
+            currentRate = currentRate + ((0 - currentRate)/2.25);
+        } else {
+            currentBG += (currentTargetBG - currentBG)/2.25;
+        }
+        
+        //advancing data points
         for (BGDataPoint *currentDP in dpArray) {
             if (currentDP.timeOfPoint < 1.985) {
                 currentDP.timeOfPoint += 1.0/6.0;
@@ -184,14 +193,6 @@
             printf("UPDATE SENT: %i, %.1f\n",pumpActiveId,pumpAmountToSend);
         } else {
             printf("UPDATE NOT SENT: %i, %.1f\n",pumpActiveId,pumpAmountToSend);
-        }
-        
-        //updating next rounds values
-        if (BGTargetOn == 0) {
-            currentBG += (float)currentRate*12.0;
-            currentRate = currentRate + ((0 - currentRate)/2.25);
-        } else {
-            currentBG += (currentTargetBG - currentBG)/2.25;
         }
         
         [currentBGLabel setText:[NSString stringWithFormat:@"%i",(int)currentBG]];
