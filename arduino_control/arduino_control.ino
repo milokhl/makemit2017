@@ -96,8 +96,8 @@ void setup(void) {
 
   pinMode(13, OUTPUT);
   
-  while (!Serial);  // required for Flora & Micro
-  delay(500);
+  //while (!Serial);  // required for Flora & Micro
+  //delay(500);
 
   Serial.begin(115200);
 
