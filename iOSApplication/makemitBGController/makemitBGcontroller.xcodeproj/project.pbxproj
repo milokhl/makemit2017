@@ -1,0 +1,395 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		FC2368751E5F7833002ABA52 /* BGDataPoint.m in Sources */ = {isa = PBXBuildFile; fileRef = FC2368741E5F7833002ABA52 /* BGDataPoint.m */; };
+		FC2368771E5F7841002ABA52 /* CoreBluetooth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC2368761E5F7841002ABA52 /* CoreBluetooth.framework */; };
+		FC2C3D5C1E5E8AF9009FA8AC /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = FC2C3D5B1E5E8AF9009FA8AC /* main.m */; };
+		FC2C3D5F1E5E8AF9009FA8AC /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = FC2C3D5E1E5E8AF9009FA8AC /* AppDelegate.m */; };
+		FC2C3D621E5E8AF9009FA8AC /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FC2C3D611E5E8AF9009FA8AC /* ViewController.m */; };
+		FC2C3D651E5E8AF9009FA8AC /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FC2C3D631E5E8AF9009FA8AC /* Main.storyboard */; };
+		FC2C3D681E5E8AF9009FA8AC /* makemitBGcontroller.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = FC2C3D661E5E8AF9009FA8AC /* makemitBGcontroller.xcdatamodeld */; };
+		FC2C3D6A1E5E8AF9009FA8AC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FC2C3D691E5E8AF9009FA8AC /* Assets.xcassets */; };
+		FC2C3D6D1E5E8AF9009FA8AC /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FC2C3D6B1E5E8AF9009FA8AC /* LaunchScreen.storyboard */; };
+		FC2C3D761E5E8CB9009FA8AC /* arrow_up.png in Resources */ = {isa = PBXBuildFile; fileRef = FC2C3D751E5E8CB9009FA8AC /* arrow_up.png */; };
+		FC2C3D7A1E5E8DE1009FA8AC /* GLKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC2C3D781E5E8DE1009FA8AC /* GLKit.framework */; };
+		FC2C3D7B1E5E8DE1009FA8AC /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC2C3D791E5E8DE1009FA8AC /* OpenGLES.framework */; };
+		FC2C3D7D1E5E9347009FA8AC /* line.png in Resources */ = {isa = PBXBuildFile; fileRef = FC2C3D7C1E5E9347009FA8AC /* line.png */; };
+		FCBCBD431E61C968005CB008 /* objectUniqueIDAssigner.m in Sources */ = {isa = PBXBuildFile; fileRef = FCBCBD421E61C968005CB008 /* objectUniqueIDAssigner.m */; };
+		FCBCBD461E61CE5C005CB008 /* button_add.png in Resources */ = {isa = PBXBuildFile; fileRef = FCBCBD441E61CE5C005CB008 /* button_add.png */; };
+		FCBCBD471E61CE5C005CB008 /* datapoint.png in Resources */ = {isa = PBXBuildFile; fileRef = FCBCBD451E61CE5C005CB008 /* datapoint.png */; };
+		FCBCBD491E61CE71005CB008 /* button_subtract.png in Resources */ = {isa = PBXBuildFile; fileRef = FCBCBD481E61CE71005CB008 /* button_subtract.png */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		FC2368731E5F7833002ABA52 /* BGDataPoint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BGDataPoint.h; sourceTree = "<group>"; };
+		FC2368741E5F7833002ABA52 /* BGDataPoint.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BGDataPoint.m; sourceTree = "<group>"; };
+		FC2368761E5F7841002ABA52 /* CoreBluetooth.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreBluetooth.framework; path = System/Library/Frameworks/CoreBluetooth.framework; sourceTree = SDKROOT; };
+		FC2C3D571E5E8AF9009FA8AC /* makemitBGcontroller.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = makemitBGcontroller.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		FC2C3D5B1E5E8AF9009FA8AC /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		FC2C3D5D1E5E8AF9009FA8AC /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		FC2C3D5E1E5E8AF9009FA8AC /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		FC2C3D601E5E8AF9009FA8AC /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
+		FC2C3D611E5E8AF9009FA8AC /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		FC2C3D641E5E8AF9009FA8AC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		FC2C3D671E5E8AF9009FA8AC /* makemitBGcontroller.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = makemitBGcontroller.xcdatamodel; sourceTree = "<group>"; };
+		FC2C3D691E5E8AF9009FA8AC /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		FC2C3D6C1E5E8AF9009FA8AC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		FC2C3D6E1E5E8AF9009FA8AC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		FC2C3D751E5E8CB9009FA8AC /* arrow_up.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = arrow_up.png; sourceTree = "<group>"; };
+		FC2C3D781E5E8DE1009FA8AC /* GLKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLKit.framework; path = System/Library/Frameworks/GLKit.framework; sourceTree = SDKROOT; };
+		FC2C3D791E5E8DE1009FA8AC /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
+		FC2C3D7C1E5E9347009FA8AC /* line.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = line.png; sourceTree = "<group>"; };
+		FCBCBD411E61C968005CB008 /* objectUniqueIDAssigner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = objectUniqueIDAssigner.h; sourceTree = "<group>"; };
+		FCBCBD421E61C968005CB008 /* objectUniqueIDAssigner.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = objectUniqueIDAssigner.m; sourceTree = "<group>"; };
+		FCBCBD441E61CE5C005CB008 /* button_add.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = button_add.png; sourceTree = "<group>"; };
+		FCBCBD451E61CE5C005CB008 /* datapoint.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = datapoint.png; sourceTree = "<group>"; };
+		FCBCBD481E61CE71005CB008 /* button_subtract.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = button_subtract.png; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		FC2C3D541E5E8AF8009FA8AC /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FC2368771E5F7841002ABA52 /* CoreBluetooth.framework in Frameworks */,
+				FC2C3D7A1E5E8DE1009FA8AC /* GLKit.framework in Frameworks */,
+				FC2C3D7B1E5E8DE1009FA8AC /* OpenGLES.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		FC2C3D4E1E5E8AF8009FA8AC = {
+			isa = PBXGroup;
+			children = (
+				FC2C3D591E5E8AF9009FA8AC /* makemitBGcontroller */,
+				FC2C3D581E5E8AF9009FA8AC /* Products */,
+				FC2C3D771E5E8DE1009FA8AC /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		FC2C3D581E5E8AF9009FA8AC /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				FC2C3D571E5E8AF9009FA8AC /* makemitBGcontroller.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		FC2C3D591E5E8AF9009FA8AC /* makemitBGcontroller */ = {
+			isa = PBXGroup;
+			children = (
+				FC2C3D5D1E5E8AF9009FA8AC /* AppDelegate.h */,
+				FC2C3D5E1E5E8AF9009FA8AC /* AppDelegate.m */,
+				FC2C3D601E5E8AF9009FA8AC /* ViewController.h */,
+				FC2C3D611E5E8AF9009FA8AC /* ViewController.m */,
+				FCBCBD411E61C968005CB008 /* objectUniqueIDAssigner.h */,
+				FCBCBD421E61C968005CB008 /* objectUniqueIDAssigner.m */,
+				FC2C3D631E5E8AF9009FA8AC /* Main.storyboard */,
+				FC2368731E5F7833002ABA52 /* BGDataPoint.h */,
+				FC2368741E5F7833002ABA52 /* BGDataPoint.m */,
+				FC2C3D691E5E8AF9009FA8AC /* Assets.xcassets */,
+				FC2C3D6B1E5E8AF9009FA8AC /* LaunchScreen.storyboard */,
+				FC2C3D6E1E5E8AF9009FA8AC /* Info.plist */,
+				FC2C3D661E5E8AF9009FA8AC /* makemitBGcontroller.xcdatamodeld */,
+				FC2C3D741E5E8C91009FA8AC /* ImportedResources */,
+				FC2C3D5A1E5E8AF9009FA8AC /* Supporting Files */,
+			);
+			path = makemitBGcontroller;
+			sourceTree = "<group>";
+		};
+		FC2C3D5A1E5E8AF9009FA8AC /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				FC2C3D5B1E5E8AF9009FA8AC /* main.m */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		FC2C3D741E5E8C91009FA8AC /* ImportedResources */ = {
+			isa = PBXGroup;
+			children = (
+				FC2C3D7C1E5E9347009FA8AC /* line.png */,
+				FC2C3D751E5E8CB9009FA8AC /* arrow_up.png */,
+				FCBCBD441E61CE5C005CB008 /* button_add.png */,
+				FCBCBD481E61CE71005CB008 /* button_subtract.png */,
+				FCBCBD451E61CE5C005CB008 /* datapoint.png */,
+			);
+			name = ImportedResources;
+			sourceTree = "<group>";
+		};
+		FC2C3D771E5E8DE1009FA8AC /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				FC2368761E5F7841002ABA52 /* CoreBluetooth.framework */,
+				FC2C3D781E5E8DE1009FA8AC /* GLKit.framework */,
+				FC2C3D791E5E8DE1009FA8AC /* OpenGLES.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		FC2C3D561E5E8AF8009FA8AC /* makemitBGcontroller */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = FC2C3D711E5E8AF9009FA8AC /* Build configuration list for PBXNativeTarget "makemitBGcontroller" */;
+			buildPhases = (
+				FC2C3D531E5E8AF8009FA8AC /* Sources */,
+				FC2C3D541E5E8AF8009FA8AC /* Frameworks */,
+				FC2C3D551E5E8AF8009FA8AC /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = makemitBGcontroller;
+			productName = makemitBGcontroller;
+			productReference = FC2C3D571E5E8AF9009FA8AC /* makemitBGcontroller.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		FC2C3D4F1E5E8AF8009FA8AC /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0820;
+				ORGANIZATIONNAME = MagMHJ;
+				TargetAttributes = {
+					FC2C3D561E5E8AF8009FA8AC = {
+						CreatedOnToolsVersion = 8.2.1;
+						DevelopmentTeam = RN5RJ6PAK3;
+						ProvisioningStyle = Automatic;
+					};
+				};
+			};
+			buildConfigurationList = FC2C3D521E5E8AF8009FA8AC /* Build configuration list for PBXProject "makemitBGcontroller" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = FC2C3D4E1E5E8AF8009FA8AC;
+			productRefGroup = FC2C3D581E5E8AF9009FA8AC /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				FC2C3D561E5E8AF8009FA8AC /* makemitBGcontroller */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		FC2C3D551E5E8AF8009FA8AC /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FC2C3D6D1E5E8AF9009FA8AC /* LaunchScreen.storyboard in Resources */,
+				FCBCBD491E61CE71005CB008 /* button_subtract.png in Resources */,
+				FC2C3D7D1E5E9347009FA8AC /* line.png in Resources */,
+				FC2C3D6A1E5E8AF9009FA8AC /* Assets.xcassets in Resources */,
+				FCBCBD461E61CE5C005CB008 /* button_add.png in Resources */,
+				FC2C3D761E5E8CB9009FA8AC /* arrow_up.png in Resources */,
+				FCBCBD471E61CE5C005CB008 /* datapoint.png in Resources */,
+				FC2C3D651E5E8AF9009FA8AC /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		FC2C3D531E5E8AF8009FA8AC /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FC2C3D621E5E8AF9009FA8AC /* ViewController.m in Sources */,
+				FC2368751E5F7833002ABA52 /* BGDataPoint.m in Sources */,
+				FCBCBD431E61C968005CB008 /* objectUniqueIDAssigner.m in Sources */,
+				FC2C3D5F1E5E8AF9009FA8AC /* AppDelegate.m in Sources */,
+				FC2C3D681E5E8AF9009FA8AC /* makemitBGcontroller.xcdatamodeld in Sources */,
+				FC2C3D5C1E5E8AF9009FA8AC /* main.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		FC2C3D631E5E8AF9009FA8AC /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				FC2C3D641E5E8AF9009FA8AC /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		FC2C3D6B1E5E8AF9009FA8AC /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				FC2C3D6C1E5E8AF9009FA8AC /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		FC2C3D6F1E5E8AF9009FA8AC /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		FC2C3D701E5E8AF9009FA8AC /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		FC2C3D721E5E8AF9009FA8AC /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = RN5RJ6PAK3;
+				INFOPLIST_FILE = makemitBGcontroller/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = MagMHJ.makemitBGcontroller;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		FC2C3D731E5E8AF9009FA8AC /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = RN5RJ6PAK3;
+				INFOPLIST_FILE = makemitBGcontroller/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = MagMHJ.makemitBGcontroller;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		FC2C3D521E5E8AF8009FA8AC /* Build configuration list for PBXProject "makemitBGcontroller" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				FC2C3D6F1E5E8AF9009FA8AC /* Debug */,
+				FC2C3D701E5E8AF9009FA8AC /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		FC2C3D711E5E8AF9009FA8AC /* Build configuration list for PBXNativeTarget "makemitBGcontroller" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				FC2C3D721E5E8AF9009FA8AC /* Debug */,
+				FC2C3D731E5E8AF9009FA8AC /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		FC2C3D661E5E8AF9009FA8AC /* makemitBGcontroller.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				FC2C3D671E5E8AF9009FA8AC /* makemitBGcontroller.xcdatamodel */,
+			);
+			currentVersion = FC2C3D671E5E8AF9009FA8AC /* makemitBGcontroller.xcdatamodel */;
+			path = makemitBGcontroller.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
+	};
+	rootObject = FC2C3D4F1E5E8AF8009FA8AC /* Project object */;
+}
