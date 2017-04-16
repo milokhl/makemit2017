@@ -81,6 +81,22 @@
     [peripheral discoverServices:nil];
 }
 
+- (void)centralManager:(CBCentralManager *)central didDisconnectPeripheral:(CBPeripheral *)peripheral error:(NSError *)error {
+    [btCManager scanForPeripheralsWithServices:nil options:nil];
+    discoveredPeripheral = nil;
+    writeCharacteristic = nil;
+    notifyCharacteristic = nil;
+    printf("peripheral disconnected, rescanning...");
+}
+
+- (void)centralManager:(CBCentralManager *)central didFailToConnectPeripheral:(CBPeripheral *)peripheral error:(NSError *)error {
+    [btCManager scanForPeripheralsWithServices:nil options:nil];
+    discoveredPeripheral = nil;
+    writeCharacteristic = nil;
+    notifyCharacteristic = nil;
+    printf("peripheral failed to connect, rescanning...");
+}
+
 - (void)peripheral:(CBPeripheral *)peripheral didDiscoverServices:(NSError *)error {
     for (CBService *service in peripheral.services) {
         //NSLog(@"Discovered service %@", service);
