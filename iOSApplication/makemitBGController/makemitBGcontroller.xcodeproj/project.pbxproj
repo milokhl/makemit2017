@@ -24,6 +24,8 @@
 		FCBCBD461E61CE5C005CB008 /* button_add.png in Resources */ = {isa = PBXBuildFile; fileRef = FCBCBD441E61CE5C005CB008 /* button_add.png */; };
 		FCBCBD471E61CE5C005CB008 /* datapoint.png in Resources */ = {isa = PBXBuildFile; fileRef = FCBCBD451E61CE5C005CB008 /* datapoint.png */; };
 		FCBCBD491E61CE71005CB008 /* button_subtract.png in Resources */ = {isa = PBXBuildFile; fileRef = FCBCBD481E61CE71005CB008 /* button_subtract.png */; };
+		FCF8B92C1EA3109F00992B87 /* button_arrow_left.png in Resources */ = {isa = PBXBuildFile; fileRef = FCF8B92A1EA3109F00992B87 /* button_arrow_left.png */; };
+		FCF8B92D1EA3109F00992B87 /* button_arrow_right.png in Resources */ = {isa = PBXBuildFile; fileRef = FCF8B92B1EA3109F00992B87 /* button_arrow_right.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -50,6 +52,8 @@
 		FCBCBD441E61CE5C005CB008 /* button_add.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = button_add.png; sourceTree = "<group>"; };
 		FCBCBD451E61CE5C005CB008 /* datapoint.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = datapoint.png; sourceTree = "<group>"; };
 		FCBCBD481E61CE71005CB008 /* button_subtract.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = button_subtract.png; sourceTree = "<group>"; };
+		FCF8B92A1EA3109F00992B87 /* button_arrow_left.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = button_arrow_left.png; sourceTree = "<group>"; };
+		FCF8B92B1EA3109F00992B87 /* button_arrow_right.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = button_arrow_right.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -116,6 +120,8 @@
 		FC2C3D741E5E8C91009FA8AC /* ImportedResources */ = {
 			isa = PBXGroup;
 			children = (
+				FCF8B92A1EA3109F00992B87 /* button_arrow_left.png */,
+				FCF8B92B1EA3109F00992B87 /* button_arrow_right.png */,
 				FC2C3D7C1E5E9347009FA8AC /* line.png */,
 				FC2C3D751E5E8CB9009FA8AC /* arrow_up.png */,
 				FCBCBD441E61CE5C005CB008 /* button_add.png */,
@@ -194,6 +200,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FCF8B92D1EA3109F00992B87 /* button_arrow_right.png in Resources */,
 				FC2C3D6D1E5E8AF9009FA8AC /* LaunchScreen.storyboard in Resources */,
 				FCBCBD491E61CE71005CB008 /* button_subtract.png in Resources */,
 				FC2C3D7D1E5E9347009FA8AC /* line.png in Resources */,
@@ -201,6 +208,7 @@
 				FCBCBD461E61CE5C005CB008 /* button_add.png in Resources */,
 				FC2C3D761E5E8CB9009FA8AC /* arrow_up.png in Resources */,
 				FCBCBD471E61CE5C005CB008 /* datapoint.png in Resources */,
+				FCF8B92C1EA3109F00992B87 /* button_arrow_left.png in Resources */,
 				FC2C3D651E5E8AF9009FA8AC /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
