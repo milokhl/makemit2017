@@ -1,9 +1,8 @@
 #import <UIKit/UIKit.h>
 #import <GLKit/GLKit.h>
 #import "BGDataPoint.h"
-#import <CoreBluetooth/CoreBluetooth.h>
 
-@interface ViewController : UIViewController <CBPeripheralManagerDelegate, CBCentralManagerDelegate, CBPeripheralDelegate> {
+@interface simulatorViewController : UIViewController {
     int refreshTimer;
     int refreshTimerMax;
     float screenCenterWidth;
@@ -31,23 +30,15 @@
     IBOutlet UIButton *raiseTargetBGButton;
     IBOutlet UIButton *lowerTargetBGButton;
     
-    CBCentralManager *btCManager;
-    CBPeripheral *discoveredPeripheral;
-    CBCharacteristic *writeCharacteristic;
-    CBCharacteristic *notifyCharacteristic;
-    
-    /*CBPeripheralManager *btManager;
-    CBMutableService *mainDataService;
-    CBMutableCharacteristic *pumpActive;
-    CBMutableCharacteristic *pumpAmount;*/
-    
     int pumpActiveId;
     float pumpAmountToSend;
+    bool simulationPaused;
     
 }
 
 - (IBAction)raiseBGvalue:(id)sender;
 - (IBAction)lowerBGvalue:(id)sender;
+- (IBAction)toggleController:(id)sender;
 
 @end
 

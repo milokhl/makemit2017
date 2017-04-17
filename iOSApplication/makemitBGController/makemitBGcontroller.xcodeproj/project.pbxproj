@@ -11,7 +11,7 @@
 		FC2368771E5F7841002ABA52 /* CoreBluetooth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC2368761E5F7841002ABA52 /* CoreBluetooth.framework */; };
 		FC2C3D5C1E5E8AF9009FA8AC /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = FC2C3D5B1E5E8AF9009FA8AC /* main.m */; };
 		FC2C3D5F1E5E8AF9009FA8AC /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = FC2C3D5E1E5E8AF9009FA8AC /* AppDelegate.m */; };
-		FC2C3D621E5E8AF9009FA8AC /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FC2C3D611E5E8AF9009FA8AC /* ViewController.m */; };
+		FC2C3D621E5E8AF9009FA8AC /* simulatorViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FC2C3D611E5E8AF9009FA8AC /* simulatorViewController.m */; };
 		FC2C3D651E5E8AF9009FA8AC /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FC2C3D631E5E8AF9009FA8AC /* Main.storyboard */; };
 		FC2C3D681E5E8AF9009FA8AC /* makemitBGcontroller.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = FC2C3D661E5E8AF9009FA8AC /* makemitBGcontroller.xcdatamodeld */; };
 		FC2C3D6A1E5E8AF9009FA8AC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FC2C3D691E5E8AF9009FA8AC /* Assets.xcassets */; };
@@ -24,8 +24,11 @@
 		FCBCBD461E61CE5C005CB008 /* button_add.png in Resources */ = {isa = PBXBuildFile; fileRef = FCBCBD441E61CE5C005CB008 /* button_add.png */; };
 		FCBCBD471E61CE5C005CB008 /* datapoint.png in Resources */ = {isa = PBXBuildFile; fileRef = FCBCBD451E61CE5C005CB008 /* datapoint.png */; };
 		FCBCBD491E61CE71005CB008 /* button_subtract.png in Resources */ = {isa = PBXBuildFile; fileRef = FCBCBD481E61CE71005CB008 /* button_subtract.png */; };
+		FCCE3C391EA46D5600F0FC50 /* bluetoothManager.m in Sources */ = {isa = PBXBuildFile; fileRef = FCCE3C381EA46D5600F0FC50 /* bluetoothManager.m */; };
 		FCF8B92C1EA3109F00992B87 /* button_arrow_left.png in Resources */ = {isa = PBXBuildFile; fileRef = FCF8B92A1EA3109F00992B87 /* button_arrow_left.png */; };
 		FCF8B92D1EA3109F00992B87 /* button_arrow_right.png in Resources */ = {isa = PBXBuildFile; fileRef = FCF8B92B1EA3109F00992B87 /* button_arrow_right.png */; };
+		FCF8B9301EA3154900992B87 /* startViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FCF8B92F1EA3154900992B87 /* startViewController.m */; };
+		FCF8B9331EA3158600992B87 /* receiverViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FCF8B9321EA3158600992B87 /* receiverViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -36,8 +39,8 @@
 		FC2C3D5B1E5E8AF9009FA8AC /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		FC2C3D5D1E5E8AF9009FA8AC /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		FC2C3D5E1E5E8AF9009FA8AC /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		FC2C3D601E5E8AF9009FA8AC /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		FC2C3D611E5E8AF9009FA8AC /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		FC2C3D601E5E8AF9009FA8AC /* simulatorViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = simulatorViewController.h; sourceTree = "<group>"; };
+		FC2C3D611E5E8AF9009FA8AC /* simulatorViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = simulatorViewController.m; sourceTree = "<group>"; };
 		FC2C3D641E5E8AF9009FA8AC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		FC2C3D671E5E8AF9009FA8AC /* makemitBGcontroller.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = makemitBGcontroller.xcdatamodel; sourceTree = "<group>"; };
 		FC2C3D691E5E8AF9009FA8AC /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -52,8 +55,14 @@
 		FCBCBD441E61CE5C005CB008 /* button_add.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = button_add.png; sourceTree = "<group>"; };
 		FCBCBD451E61CE5C005CB008 /* datapoint.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = datapoint.png; sourceTree = "<group>"; };
 		FCBCBD481E61CE71005CB008 /* button_subtract.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = button_subtract.png; sourceTree = "<group>"; };
+		FCCE3C371EA46D5600F0FC50 /* bluetoothManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = bluetoothManager.h; sourceTree = "<group>"; };
+		FCCE3C381EA46D5600F0FC50 /* bluetoothManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = bluetoothManager.m; sourceTree = "<group>"; };
 		FCF8B92A1EA3109F00992B87 /* button_arrow_left.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = button_arrow_left.png; sourceTree = "<group>"; };
 		FCF8B92B1EA3109F00992B87 /* button_arrow_right.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = button_arrow_right.png; sourceTree = "<group>"; };
+		FCF8B92E1EA3154900992B87 /* startViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = startViewController.h; sourceTree = "<group>"; };
+		FCF8B92F1EA3154900992B87 /* startViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = startViewController.m; sourceTree = "<group>"; };
+		FCF8B9311EA3158600992B87 /* receiverViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = receiverViewController.h; sourceTree = "<group>"; };
+		FCF8B9321EA3158600992B87 /* receiverViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = receiverViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -92,8 +101,14 @@
 			children = (
 				FC2C3D5D1E5E8AF9009FA8AC /* AppDelegate.h */,
 				FC2C3D5E1E5E8AF9009FA8AC /* AppDelegate.m */,
-				FC2C3D601E5E8AF9009FA8AC /* ViewController.h */,
-				FC2C3D611E5E8AF9009FA8AC /* ViewController.m */,
+				FCF8B92E1EA3154900992B87 /* startViewController.h */,
+				FCF8B92F1EA3154900992B87 /* startViewController.m */,
+				FC2C3D601E5E8AF9009FA8AC /* simulatorViewController.h */,
+				FC2C3D611E5E8AF9009FA8AC /* simulatorViewController.m */,
+				FCCE3C371EA46D5600F0FC50 /* bluetoothManager.h */,
+				FCCE3C381EA46D5600F0FC50 /* bluetoothManager.m */,
+				FCF8B9311EA3158600992B87 /* receiverViewController.h */,
+				FCF8B9321EA3158600992B87 /* receiverViewController.m */,
 				FCBCBD411E61C968005CB008 /* objectUniqueIDAssigner.h */,
 				FCBCBD421E61C968005CB008 /* objectUniqueIDAssigner.m */,
 				FC2C3D631E5E8AF9009FA8AC /* Main.storyboard */,
@@ -220,12 +235,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FC2C3D621E5E8AF9009FA8AC /* ViewController.m in Sources */,
+				FC2C3D621E5E8AF9009FA8AC /* simulatorViewController.m in Sources */,
 				FC2368751E5F7833002ABA52 /* BGDataPoint.m in Sources */,
 				FCBCBD431E61C968005CB008 /* objectUniqueIDAssigner.m in Sources */,
 				FC2C3D5F1E5E8AF9009FA8AC /* AppDelegate.m in Sources */,
+				FCF8B9301EA3154900992B87 /* startViewController.m in Sources */,
 				FC2C3D681E5E8AF9009FA8AC /* makemitBGcontroller.xcdatamodeld in Sources */,
 				FC2C3D5C1E5E8AF9009FA8AC /* main.m in Sources */,
+				FCCE3C391EA46D5600F0FC50 /* bluetoothManager.m in Sources */,
+				FCF8B9331EA3158600992B87 /* receiverViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
