@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12118" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="bnN-0Y-CKW">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12120" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="bnN-0Y-CKW">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12086"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -265,22 +265,88 @@
                                     <constraint firstAttribute="width" constant="24" id="VGV-Vt-lcE"/>
                                 </constraints>
                             </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ywc-qy-Fzn">
+                                <rect key="frame" x="125" y="352" width="124" height="71"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="71" id="7EK-1b-qTN"/>
+                                    <constraint firstAttribute="width" constant="124" id="pgv-4f-HUT"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="Avenir-Black" family="Avenir" pointSize="39"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Test Motor Angle:" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cl2-Oj-plF">
+                                <rect key="frame" x="0.0" y="323" width="375" height="42"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="42" id="ctz-1g-ZVM"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="Avenir-Light" family="Avenir" pointSize="20"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="enp-gZ-D50">
+                                <rect key="frame" x="257" y="360" width="55" height="55"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="55" id="3Ec-lS-oIX"/>
+                                    <constraint firstAttribute="width" constant="55" id="ebb-M0-0hx"/>
+                                </constraints>
+                                <state key="normal" title="Button" image="button_subtract.png"/>
+                                <connections>
+                                    <action selector="subtractFromMotorAngle:" destination="rUL-PT-Bfj" eventType="touchUpInside" id="Fzy-Sp-LT0"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LGR-HW-ohg">
+                                <rect key="frame" x="62" y="360" width="55" height="55"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="55" id="9X1-Vi-yNi"/>
+                                    <constraint firstAttribute="width" constant="55" id="qJj-dL-w2d"/>
+                                </constraints>
+                                <state key="normal" title="Button" image="button_add.png"/>
+                                <connections>
+                                    <action selector="addToMotorAngle:" destination="rUL-PT-Bfj" eventType="touchUpInside" id="LO0-mf-06l"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cf9-V9-GSq" userLabel="nextVCButton">
+                                <rect key="frame" x="165" y="419" width="45" height="45"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="45" id="bSz-BU-6kR"/>
+                                    <constraint firstAttribute="height" constant="45" id="mjM-8o-1Qk"/>
+                                </constraints>
+                                <state key="normal" title="Button" image="button_arrow_right.png"/>
+                                <connections>
+                                    <action selector="sendMotorAngle:" destination="rUL-PT-Bfj" eventType="touchUpInside" id="D4e-Ns-a10"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="0.77500688809999996" green="0.94160022249999997" blue="0.97892252599999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
+                            <constraint firstItem="cf9-V9-GSq" firstAttribute="top" secondItem="cl2-Oj-plF" secondAttribute="bottom" constant="54" id="B3z-p1-sKA"/>
                             <constraint firstItem="mHk-Dm-lQB" firstAttribute="top" secondItem="mxx-aR-Pd8" secondAttribute="bottom" constant="20" id="FQH-As-w2r"/>
                             <constraint firstAttribute="trailingMargin" secondItem="vh0-QX-QRX" secondAttribute="trailing" constant="10" id="I43-7U-Tma"/>
+                            <constraint firstItem="LGR-HW-ohg" firstAttribute="top" secondItem="ZS3-cR-w2X" secondAttribute="bottom" constant="45" id="J8y-M9-qKz"/>
                             <constraint firstItem="4CW-lN-oKt" firstAttribute="top" secondItem="xio-Z7-mEp" secondAttribute="bottom" constant="14" id="LTr-OY-yfF"/>
+                            <constraint firstItem="ywc-qy-Fzn" firstAttribute="top" secondItem="4CW-lN-oKt" secondAttribute="bottom" constant="116" id="NgI-Tr-DBs"/>
+                            <constraint firstItem="enp-gZ-D50" firstAttribute="top" secondItem="4CW-lN-oKt" secondAttribute="bottom" constant="124" id="PeB-ud-krs"/>
+                            <constraint firstItem="ywc-qy-Fzn" firstAttribute="centerX" secondItem="tae-PJ-xYt" secondAttribute="centerX" id="PkZ-8b-3HG"/>
                             <constraint firstAttribute="trailing" secondItem="4CW-lN-oKt" secondAttribute="trailing" id="SZN-jY-4Pg"/>
+                            <constraint firstItem="cl2-Oj-plF" firstAttribute="leading" secondItem="tae-PJ-xYt" secondAttribute="leading" id="XsU-8s-0vw"/>
+                            <constraint firstItem="ywc-qy-Fzn" firstAttribute="leading" secondItem="LGR-HW-ohg" secondAttribute="trailing" constant="8" id="YAD-eo-NTk"/>
+                            <constraint firstItem="cl2-Oj-plF" firstAttribute="top" secondItem="ZS3-cR-w2X" secondAttribute="bottom" constant="8" id="YBi-cw-ojr"/>
                             <constraint firstItem="ZS3-cR-w2X" firstAttribute="leading" secondItem="tae-PJ-xYt" secondAttribute="leadingMargin" id="Zy0-HD-2DR"/>
+                            <constraint firstAttribute="trailing" secondItem="cl2-Oj-plF" secondAttribute="trailing" id="dee-5N-Bha"/>
                             <constraint firstItem="mHk-Dm-lQB" firstAttribute="top" secondItem="96p-3L-UaA" secondAttribute="bottom" constant="31" id="e5V-b7-wg1"/>
+                            <constraint firstItem="cf9-V9-GSq" firstAttribute="centerX" secondItem="tae-PJ-xYt" secondAttribute="centerX" id="g4g-II-vcD"/>
                             <constraint firstItem="ZS3-cR-w2X" firstAttribute="top" secondItem="4CW-lN-oKt" secondAttribute="bottom" constant="8" id="jMb-l9-aBf"/>
                             <constraint firstItem="96p-3L-UaA" firstAttribute="leading" secondItem="mxx-aR-Pd8" secondAttribute="trailing" constant="16" id="kFN-uP-fsk"/>
                             <constraint firstItem="mxx-aR-Pd8" firstAttribute="leading" secondItem="tae-PJ-xYt" secondAttribute="leadingMargin" constant="6" id="n6p-bQ-Dws"/>
                             <constraint firstItem="4CW-lN-oKt" firstAttribute="leading" secondItem="tae-PJ-xYt" secondAttribute="leading" id="siV-zD-x3T"/>
+                            <constraint firstItem="enp-gZ-D50" firstAttribute="leading" secondItem="ywc-qy-Fzn" secondAttribute="trailing" constant="8" id="vPq-Tb-ZcD"/>
                             <constraint firstItem="vh0-QX-QRX" firstAttribute="top" secondItem="4CW-lN-oKt" secondAttribute="bottom" constant="26" id="wYc-SY-DU3"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="currentMotorAngle" destination="ywc-qy-Fzn" id="wMX-jY-IJ3"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1uC-Wf-Y6I" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

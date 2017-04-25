@@ -9,9 +9,13 @@
 #import <UIKit/UIKit.h>
 
 @interface receiverViewController : UIViewController {
-    
+    int testMotorAngle;
+    IBOutlet UILabel *currentMotorAngle;
 }
 
+- (IBAction)addToMotorAngle:(id)sender;
+- (IBAction)subtractFromMotorAngle:(id)sender;
+- (IBAction)sendMotorAngle:(id)sender;
 - (IBAction)toggleController:(id)sender;
 
 @end
