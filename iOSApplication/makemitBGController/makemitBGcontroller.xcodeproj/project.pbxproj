@@ -364,7 +364,7 @@
 				DEVELOPMENT_TEAM = RN5RJ6PAK3;
 				INFOPLIST_FILE = makemitBGcontroller/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = MagMHJ.makemitBGcontroller;
+				PRODUCT_BUNDLE_IDENTIFIER = MagMHJ.gifsclosedloop;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -376,7 +376,7 @@
 				DEVELOPMENT_TEAM = RN5RJ6PAK3;
 				INFOPLIST_FILE = makemitBGcontroller/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = MagMHJ.makemitBGcontroller;
+				PRODUCT_BUNDLE_IDENTIFIER = MagMHJ.gifsclosedloop;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;

@@ -111,9 +111,24 @@
         [dpArrayTransition addObject:dataPoint1];
         
         //algorithm for pump to use & amount to push
-        pumpAmountToSend = currentBG;
+        pumpAmountToSend = ((targetBGValue-currentBG)/insulinSensitivityRatio);
+        /*for (int i = 0; i < numberOfTimestepsMonitored; i++) {
+            float decayFactor = 0.2; //0.6*((1.0-(float)i/((float)numberOfTimestepsMonitored-0.5)));
+            pumpAmountToSend -= decayFactor*fabsf([[pumpAmountsSentTimeline objectAtIndex:i] floatValue]);
+        }*/
+        [[bluetoothManager sharedBMan] sendBGValue:(int)(pumpAmountToSend*100.0)];
         
-        [[bluetoothManager sharedBMan] sendBGValue:(int)pumpAmountToSend];
+        printf("pats: %f\n",pumpAmountToSend);
+        
+        //saves sent amount to timeline to be used in future amount calculations
+        for (int i = 0; i < numberOfTimestepsMonitored; i++) {
+            int indexBeingChanged = (int)pumpAmountsSentTimeline.count-1-i;
+            if (indexBeingChanged > 0) {
+                [pumpAmountsSentTimeline setObject:[pumpAmountsSentTimeline objectAtIndex:indexBeingChanged-1] atIndexedSubscript:indexBeingChanged];
+            } else { //adds new value
+                [pumpAmountsSentTimeline setObject:[NSNumber numberWithFloat:pumpAmountToSend] atIndexedSubscript:0];
+            }
+        }
         
         [currentBGLabel setText:[NSString stringWithFormat:@"%i",(int)currentBG]];
     } else if (simulationPaused == 0) {
@@ -174,11 +189,21 @@
     currentTargetBG = 125;
     currentRate = 2;
     
+    targetBGValue = 125;
+    insulinSensitivityRatio = 35; //currently optimized for me, Magnus Johnson
+    
     screenCenterWidth = [UIScreen mainScreen].bounds.size.width/2;
     screenCenterHeight = [UIScreen mainScreen].bounds.size.height/2;
     
     dpArray = [[NSMutableArray alloc] init];
     dpArrayTransition = [[NSMutableArray alloc] init];
+    
+    numberOfTimestepsMonitored = 2;
+    pumpAmountsSentTimeline = [[NSMutableArray alloc] init];
+    
+    for (int i = 0; i < numberOfTimestepsMonitored; i++) {
+        [pumpAmountsSentTimeline addObject:[NSNumber numberWithFloat:0.0]];
+    }
     
     //initial dataPoints
     for (int int1 = 0; int1 <= 12; int1++) {
@@ -196,7 +221,10 @@
     pumpActiveId = 1;
     
     //start regular timer
-    [NSTimer scheduledTimerWithTimeInterval:1/60.0f target:self selector:@selector(update:) userInfo:nil repeats:YES];
+    //[NSTimer scheduledTimerWithTimeInterval:1/60.0f target:self selector:@selector(update:) userInfo:nil repeats:YES];
+    
+    CADisplayLink *displayLink = [CADisplayLink displayLinkWithTarget:self selector:@selector(update:)];
+    [displayLink addToRunLoop:[NSRunLoop mainRunLoop] forMode:NSDefaultRunLoopMode];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
