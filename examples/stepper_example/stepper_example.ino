@@ -13,7 +13,7 @@ int R_in4Pin = 10;
 int L_in1Pin = 9; // the not PWM one
 int L_in2Pin = 6; 
 int L_in3Pin = 5;
-int L_in4Pin = A4;
+int L_in4Pin = A1;
 
 Stepper left_motor(512, L_in1Pin, L_in2Pin, L_in3Pin, L_in4Pin);  
 Stepper right_motor(512, R_in1Pin, R_in2Pin, R_in3Pin, R_in4Pin); 
@@ -51,5 +51,7 @@ void loop() {
     
     left_motor.step(steps);
     right_motor.step(steps);
+
+    delay(1000);
   }
 }
