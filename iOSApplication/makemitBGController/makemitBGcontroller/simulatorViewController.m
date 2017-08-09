@@ -111,12 +111,14 @@
         [dpArrayTransition addObject:dataPoint1];
         
         //algorithm for pump to use & amount to push
+        float dampingFactor = 0.7;
         pumpAmountToSend = ((targetBGValue-currentBG)/insulinSensitivityRatio);
+        pumpAmountToSend = (pumpAmountToSend/10.0)*(24.0/30.0)*512.0*dampingFactor;
         /*for (int i = 0; i < numberOfTimestepsMonitored; i++) {
             float decayFactor = 0.2; //0.6*((1.0-(float)i/((float)numberOfTimestepsMonitored-0.5)));
             pumpAmountToSend -= decayFactor*fabsf([[pumpAmountsSentTimeline objectAtIndex:i] floatValue]);
         }*/
-        [[bluetoothManager sharedBMan] sendBGValue:(int)(pumpAmountToSend*100.0)];
+        [[bluetoothManager sharedBMan] sendBGValue:(int)(pumpAmountToSend)];
         
         printf("pats: %f\n",pumpAmountToSend);
         
@@ -182,7 +184,7 @@
     // Do any additional setup after loading the view, typically from a nib.
     
     //refreshTimerMax = 600;
-    refreshTimerMax = 60;
+    refreshTimerMax = 220;
     refreshTimer = refreshTimerMax;
     
     currentBG = 125;

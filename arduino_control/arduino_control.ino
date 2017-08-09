@@ -60,6 +60,30 @@
     #define MODE_LED_BEHAVIOUR          "MODE"
 /*=========================================================================*/
 
+#include <Stepper.h>
+
+// RIGHT MOTOR
+int R_in1Pin = 13; // the not PWM one
+int R_in2Pin = 12; // looks same for Adafruit Feather M0
+int R_in3Pin = 11;
+int R_in4Pin = 10;
+
+// LEFT MOTOR
+int L_in1Pin = 9; // the not PWM one
+int L_in2Pin = 6; 
+int L_in3Pin = 5;
+int L_in4Pin = A1;
+
+Stepper left_motor(512, L_in1Pin, L_in2Pin, L_in3Pin, L_in4Pin);  
+Stepper right_motor(512, R_in1Pin, R_in2Pin, R_in3Pin, R_in4Pin); 
+
+
+int bitNumberReceived = 0;
+char c_0 = '0';
+char c_1 = '0';
+char c_2 = '0';
+
+
 // Create the bluefruit object, either software serial...uncomment these lines
 /*
 SoftwareSerial bluefruitSS = SoftwareSerial(BLUEFRUIT_SWUART_TXD_PIN, BLUEFRUIT_SWUART_RXD_PIN);
@@ -95,11 +119,30 @@ void error(const __FlashStringHelper*err) {
 void setup(void) {
 
   pinMode(13, OUTPUT);
+
+  pinMode(R_in1Pin, OUTPUT);
+  pinMode(R_in2Pin, OUTPUT);
+  pinMode(R_in3Pin, OUTPUT);
+  pinMode(R_in4Pin, OUTPUT);
+  
+  pinMode(L_in1Pin, OUTPUT);
+  pinMode(L_in2Pin, OUTPUT);
+  pinMode(L_in3Pin, OUTPUT);
+  pinMode(L_in4Pin, OUTPUT);
+
+  // this line is for Leonardo's, it delays the serial interface
+  // until the terminal window is opened
+  while (!Serial);
+  
+  Serial.begin(9600);
+
+  // set the speed of the motors
+  // probably want to keep this low so that motors don't draw too much power
+  left_motor.setSpeed(5);
+  right_motor.setSpeed(5);
   
   //while (!Serial);  // required for Flora & Micro
   //delay(500);
-
-  Serial.begin(115200);
 
   /* Initialise the module */
   Serial.print(F("Initialising the Bluefruit LE module: "));
@@ -173,29 +216,41 @@ void loop(void) {
 
   // Echo received data
   while (ble.available()) {
-    int c = ble.read();
+    char c = ble.read();
 
-    if (c != 0) {
-      if (c >= 245) {
-        digitalWrite(13, HIGH);
-        Serial.println("HIGH");
-      } else if (c <= 70) {
-        digitalWrite(13, HIGH);
-        Serial.println("LOW");
+    if (c == '.') {
+      bitNumberReceived = 0;
+    } else {
+      bitNumberReceived += 1;
+    }
+
+    if (bitNumberReceived == 1) {
+      c_0 = c;
+    } else if (bitNumberReceived == 2) {
+      c_1 = c;
+    } else if (bitNumberReceived == 3) {
+      c_2 = c;
+
+      int steps = (10*(c_1-'0'))+(c_2-'0');
+      int pumpID = (c_0-'0');
+      Serial.println("");
+      Serial.print("PUMP ID: ");
+      Serial.print(pumpID);
+      Serial.print(", STEPS: ");
+      Serial.print(steps);
+
+      if (pumpID == 0) {
+        left_motor.step(steps);
       } else {
-        digitalWrite(13, LOW);
-        Serial.println("NORMAL");
+        right_motor.step(steps);
       }
     }
 
-    Serial.println("");
-    Serial.print(c);
-
     // Hex output too, helps w/debugging!
-    Serial.print(" [0x");
+    /*Serial.print(" [0x");
     if (c <= 0xF) Serial.print(F("0"));
     Serial.print(c, HEX);
     Serial.print("] ");
-    Serial.println("");
+    Serial.println("");*/
   }
 }

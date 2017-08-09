@@ -11,7 +11,10 @@
 
 - (void)centralManager:(CBCentralManager *)central didDiscoverPeripheral:(CBPeripheral *)peripheral advertisementData:(NSDictionary<NSString *,id> *)advertisementData RSSI:(NSNumber *)RSSI {
     printf("DISCOVERED: %s: %s - %i services\n",[peripheral.name UTF8String],[[peripheral.identifier UUIDString] UTF8String],(int)peripheral.services.count);
-    if ([peripheral.name isEqualToString:@"Adafruit Bluefruit LE"] && [[peripheral.identifier UUIDString] isEqualToString:@"1A58BC43-D08C-4110-9BAD-A5349ABC0D45"]) {
+    if ([[peripheral.identifier UUIDString] isEqualToString:@"C60F4251-E636-4CD0-B4C5-DC1973E5DEE3"]) { //C60F4251-E636-4CD0-B4C5-DC1973E5DEE3, D62D16D9-EADE-46EE-B7BE-D52FA6FA00DF, 1A58BC43-D08C-4110-9BAD-A5349ABC0D45
+        /*if ([peripheral.name isEqualToString:@"Adafruit Bluefruit LE 99B6"] || [peripheral.name isEqualToString:@"Adafruit Bluefruit LE"]) {
+            
+        }*/
         discoveredPeripheral = peripheral;
         [btCManager connectPeripheral:discoveredPeripheral options:nil];
         [btCManager stopScan];
@@ -89,12 +92,25 @@
 
 - (void)sendBGValue:(int)BGValue {
     if (discoveredPeripheral != nil && writeCharacteristic != nil) {
-        int dataSent = (int)BGValue;
+        /*int dataSent = (int)BGValue;
         NSMutableData *dataToWrite = [NSMutableData dataWithCapacity:0];
         [dataToWrite appendBytes:&dataSent length:sizeof(int)];
-        [discoveredPeripheral writeValue:dataToWrite forCharacteristic:writeCharacteristic type:CBCharacteristicWriteWithoutResponse];
+        [discoveredPeripheral writeValue:dataToWrite forCharacteristic:writeCharacteristic type:CBCharacteristicWriteWithoutResponse];*/
         
-        printf("UPDATE SENT: %i\n",BGValue);
+        int pumpID = 1;
+        if (BGValue < 0) {
+            pumpID = 0;
+        }
+        
+        NSString *dataString = [NSString stringWithFormat:@".%i0%i",pumpID,abs(BGValue)];
+        if (abs(BGValue) > 9) {
+            dataString = [NSString stringWithFormat:@".%i%i",pumpID,abs(BGValue)];
+        }
+        const char *dataStringUTF = [dataString UTF8String];
+        NSMutableData *data1 = [NSMutableData dataWithBytes:dataStringUTF length:strlen(dataStringUTF)+1];
+        [discoveredPeripheral writeValue:data1 forCharacteristic:writeCharacteristic type:CBCharacteristicWriteWithoutResponse];
+        
+        printf("UPDATE SENT: %s\n",dataStringUTF);
     } else {
         printf("UPDATE NOT SENT: %i\n",BGValue);
     }
